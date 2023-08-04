@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date</title>
+</head>
+<body>
+    <script>
+        function findDates(str) {
+  const pattern = /\d{4}-\d{2}-\d{2}/gi;
+  const monthOfYear = [
+    'January', 'February', 'March', 'April', 'May', 'June', 
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+
+  return Array.from(str.matchAll(pattern), match => {
+    const [_, year, month, day] = match;
+    const monthValidation = parseInt(month, 10);
+    if (monthValidation >= 1 && monthValidation <= 12) {
+      return { year: +year, month: monthValidation, day: +day, monthName: monthOfYear[monthValidation - 1] };
+    } else {
+      return null;
+    }
+  }).filter(Boolean);
+}
+
+const str = "The dates between 1976-03-12, and 1983-10-14, the code was 2004-67-12 and possible invalid date 8765-11-34";
+console.log(findDates(str));
+
+    </script>
+</body>
+</html>
